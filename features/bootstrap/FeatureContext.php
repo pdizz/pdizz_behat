@@ -5,7 +5,6 @@ use Behat\Gherkin\Node\PyStringNode;
 use Behat\Gherkin\Node\TableNode;
 use PHPUnit\Framework\Assert;
 
-
 /**
  * Defines application features from the specific context.
  */
@@ -32,12 +31,12 @@ class FeatureContext implements Context
     }
 
     /**
-     * @When /^I request "(.+)"$/
+     * @When /^I request the home page$/
      */
-    public function iRequest($url)
+    public function iRequestTheHomePage()
     {
         try {
-            $this->response = $this->httpClient->get($url);
+            $this->response = $this->httpClient->get('http://pdizz.github.io/');
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             $this->request = $e->getRequest();
             if ($e->hasResponse()) {
@@ -47,9 +46,9 @@ class FeatureContext implements Context
     }
 
     /**
-     * @Then /^I should get a "(.*)" response$/
+     * @Then /^I should get a successful response$/
      */
-    public function iShouldGetAResponse($httpStatusCode)
+    public function iShouldGetASuccessfulResponse()
     {
         Assert::assertNotNull(
             $this->response,
@@ -57,10 +56,6 @@ class FeatureContext implements Context
         );
 
         $code = $this->response->getStatusCode();
-        Assert::assertEquals(
-            $httpStatusCode,
-            $code,
-            "Unexpected response code: $code"
-        );
+        Assert::assertEquals(200, $code, "Unexpected response code: $code");
     }
 }
