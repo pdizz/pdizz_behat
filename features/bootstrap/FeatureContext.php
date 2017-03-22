@@ -31,12 +31,12 @@ class FeatureContext implements Context
     }
 
     /**
-     * @When /^I request the home page$/
+     * @When /^I request "(.+)"$/
      */
-    public function iRequestTheHomePage()
+    public function iRequest($url)
     {
         try {
-            $this->response = $this->httpClient->get('http://pdizz.github.io/');
+            $this->response = $this->httpClient->get($url);
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             $this->request = $e->getRequest();
             if ($e->hasResponse()) {
@@ -46,16 +46,20 @@ class FeatureContext implements Context
     }
 
     /**
-     * @Then /^I should get a successful response$/
+     * @Then /^I should get a "(.*)" response$/
      */
-    public function iShouldGetASuccessfulResponse()
+    public function iShouldGetAResponse($expectedCode)
     {
         Assert::assertNotNull(
             $this->response,
             'Request did not receive any response, unable to get status code.'
         );
 
-        $code = $this->response->getStatusCode();
-        Assert::assertEquals(200, $code, "Unexpected response code: $code");
+        $actualCode = $this->response->getStatusCode();
+        Assert::assertEquals(
+            $expectedCode,
+            $actualCode,
+            "Unexpected response code: $actualCode"
+        );
     }
 }
