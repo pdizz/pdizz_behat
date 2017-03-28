@@ -1,0 +1,15 @@
+# behat.yml
+default:
+  suites:
+    default:
+      contexts:
+        - FeatureContext:
+            baseUrl: http://127.0.0.1:4000
+
+production:
+  suites:
+    default:
+      contexts:
+        - FeatureContext:
+            baseUrl: http://pdizz.github.io
+

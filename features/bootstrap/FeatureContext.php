@@ -18,6 +18,9 @@ class FeatureContext implements Context
     /** @var \GuzzleHttp\Psr7\Response */
     protected $response;
 
+    /** @var string */
+    protected $baseUrl;
+
     /**
      * Initializes context.
      *
@@ -25,18 +28,19 @@ class FeatureContext implements Context
      * You can also pass arbitrary arguments to the
      * context constructor through behat.yml.
      */
-    public function __construct()
+    public function __construct($baseUrl)
     {
         $this->httpClient = new GuzzleHttp\Client();
+        $this->baseUrl = $baseUrl;
     }
 
     /**
      * @When /^I request "(.+)"$/
      */
-    public function iRequest($url)
+    public function iRequest($route)
     {
         try {
-            $this->response = $this->httpClient->get($url);
+            $this->response = $this->httpClient->get($this->baseUrl . $route);
         } catch (\GuzzleHttp\Exception\RequestException $e) {
             $this->request = $e->getRequest();
             if ($e->hasResponse()) {
