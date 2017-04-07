@@ -1,0 +1,14 @@
+{
+  "client": [
+    {
+      "id": 1,
+      "firstName": "John",
+      "lastName": "Doe",
+      "address": {
+        "street": "123 Main St",
+        "city": "Denver",
+        "state": "CO"
+      }
+    }
+  ]
+}

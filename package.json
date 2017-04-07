@@ -1,0 +1,22 @@
+{
+  "name": "pdizz_behat",
+  "version": "1.0.0",
+  "description": "behat project and mock api for behat testing blog post at pdizz.github.io",
+  "main": "index.js",
+  "scripts": {
+    "test": "vendor/bin/behat"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pdizz/pdizz_behat.git"
+  },
+  "author": "Pete Albrecht",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pdizz/pdizz_behat/issues"
+  },
+  "homepage": "https://github.com/pdizz/pdizz_behat#readme",
+  "dependencies": {
+    "json-server": "^0.9.6"
+  }
+}
